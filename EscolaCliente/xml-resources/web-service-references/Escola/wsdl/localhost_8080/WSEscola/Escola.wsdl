@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://sd.ifma.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="Escola" targetNamespace="http://sd.ifma.com/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://sd.ifma.com/" elementFormDefault="unqualified" targetNamespace="http://sd.ifma.com/" version="1.0">
+
+  <xs:element name="getAluno" type="tns:getAluno"/>
+
+  <xs:element name="getAlunoResponse" type="tns:getAlunoResponse"/>
+
+  <xs:element name="getTurma" type="tns:getTurma"/>
+
+  <xs:element name="getTurmaResponse" type="tns:getTurmaResponse"/>
+
+  <xs:complexType name="getAluno">
+    <xs:sequence>
+      <xs:element name="matricula" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getAlunoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:aluno"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="aluno">
+    <xs:sequence>
+      <xs:element name="matricula" type="xs:int"/>
+      <xs:element minOccurs="0" name="nome" type="xs:string"/>
+      <xs:element minOccurs="0" name="nomeMae" type="xs:string"/>
+      <xs:element minOccurs="0" name="nomePai" type="xs:string"/>
+      <xs:element minOccurs="0" name="telefone" type="xs:string"/>
+      <xs:element minOccurs="0" name="turma" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTurma">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="turma" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTurmaResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:aluno"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getTurmaResponse">
+    <wsdl:part element="tns:getTurmaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTurma">
+    <wsdl:part element="tns:getTurma" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAlunoResponse">
+    <wsdl:part element="tns:getAlunoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAluno">
+    <wsdl:part element="tns:getAluno" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Escola">
+    <wsdl:operation name="getAluno">
+      <wsdl:input message="tns:getAluno" name="getAluno">
+    </wsdl:input>
+      <wsdl:output message="tns:getAlunoResponse" name="getAlunoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTurma">
+      <wsdl:input message="tns:getTurma" name="getTurma">
+    </wsdl:input>
+      <wsdl:output message="tns:getTurmaResponse" name="getTurmaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EscolaSoapBinding" type="tns:Escola">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAluno">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAluno">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAlunoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTurma">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getTurma">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getTurmaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Escola">
+    <wsdl:port binding="tns:EscolaSoapBinding" name="EscolaPort">
+      <soap:address location="http://localhost:8080/WSEscola/Escola"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
